@@ -1,0 +1,170 @@
+# Create GitHub Account and Push Code Using Git Commands
+
+## Step 1: Create GitHub Account
+
+1. Open [GitHub](https://github.com?utm_source=chatgpt.com)
+2. Click **Sign Up**
+3. Enter:
+
+   * Email
+   * Password
+   * Username
+4. Verify account and complete registration.
+
+---
+
+# Step 2: Install Git
+
+Download and install [Git](https://git-scm.com/downloads?utm_source=chatgpt.com)
+
+After installation, check version:
+
+```bash
+git --version
+```
+
+---
+
+# Step 3: Configure Git
+
+Open terminal or command prompt and run:
+
+```bash
+git config --global user.name "Your Name"
+
+git config --global user.email "your_email@gmail.com"
+```
+
+Check configuration:
+
+```bash
+git config --list
+```
+
+---
+
+# Step 4: Create New Repository on GitHub
+
+1. Login to [GitHub](https://github.com?utm_source=chatgpt.com)
+2. Click **New Repository**
+3. Enter repository name
+4. Click **Create Repository**
+
+Example:
+
+```text
+Repository Name: registration-project
+```
+
+---
+
+# Step 5: Create Project Folder
+
+```bash
+mkdir registration-project
+
+cd registration-project
+```
+
+Add your files:
+
+```text
+index.html
+users.html
+style.css
+script.js
+```
+
+---
+
+# Step 6: Initialize Git Repository
+
+```bash
+git init
+```
+
+---
+
+# Step 7: Add Files
+
+```bash
+git add .
+```
+
+---
+
+# Step 8: Commit Files
+
+```bash
+git commit -m "Initial project commit"
+```
+
+---
+
+# Step 9: Connect Local Repository to GitHub
+
+Copy repository URL from GitHub.
+
+Example:
+
+```bash
+git remote add origin https://github.com/username/registration-project.git
+```
+
+Check remote:
+
+```bash
+git remote -v
+```
+
+---
+
+# Step 10: Push Code to GitHub
+
+```bash
+git branch -M main
+
+git push -u origin main
+```
+
+---
+
+# ✅ Important Git Commands
+
+| Command                   | Purpose                 |
+| ------------------------- | ----------------------- |
+| `git init`                | Initialize repository   |
+| `git add .`               | Add all files           |
+| `git commit -m "message"` | Save changes            |
+| `git status`              | Check status            |
+| `git push`                | Upload code to GitHub   |
+| `git pull`                | Download latest changes |
+| `git clone URL`           | Copy repository         |
+
+---
+
+# ✅ Complete Command Sequence
+
+```bash
+git init
+
+git add .
+
+git commit -m "Initial commit"
+
+git branch -M main
+
+git remote add origin https://github.com/username/repository-name.git
+
+git push -u origin main
+```
+
+---
+
+# ✅ Result
+
+After successful push:
+
+* Your project code will be stored on [GitHub](https://github.com?utm_source=chatgpt.com)
+* Repository becomes accessible online
+* Version control is enabled using Git
