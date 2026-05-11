@@ -1,0 +1,477 @@
+# Angular User Authentication Application
+
+This Angular project will perform:
+
+✅ User Registration
+✅ User Login
+✅ Show User Profile Data
+
+Using:
+
+* Angular
+* TypeScript
+* LocalStorage
+* Angular Routing
+* Forms
+
+---
+
+# Step 1: Install Node.js
+
+Download:
+
+[Node.js Official Website](https://nodejs.org?utm_source=chatgpt.com)
+
+Verify installation:
+
+```bash id="o3f0jw"
+node -v
+npm -v
+```
+
+---
+
+# Step 2: Install Angular CLI
+
+Open terminal or CMD:
+
+```bash id="6mjlwm"
+npm install -g @angular/cli
+```
+
+Check version:
+
+```bash id="n1mtf0"
+ng version
+```
+
+---
+
+# Step 3: Create Angular Project
+
+```bash id="g9q7k0"
+ng new user-auth-app
+```
+
+Choose:
+
+```text id="zmbv8v"
+Would you like to add Angular routing? → Yes
+```
+
+```text id="b7o0mb"
+Stylesheet format → CSS
+```
+
+Move into project folder:
+
+```bash id="j5vscw"
+cd user-auth-app
+```
+
+---
+
+# Step 4: Run Angular App
+
+```bash id="n5q63n"
+ng serve
+```
+
+Open browser:
+
+```text id="mg7g6y"
+http://localhost:4200
+```
+
+---
+
+# Step 5: Generate Components
+
+Create components:
+
+```bash id="5f4mq8"
+ng generate component register
+```
+
+```bash id="h22x6o"
+ng generate component login
+```
+
+```bash id="n8q1u6"
+ng generate component profile
+```
+
+Short form:
+
+```bash id="g3d4gi"
+ng g c register
+ng g c login
+ng g c profile
+```
+
+---
+
+# Step 6: Configure Routing
+
+Open:
+
+```text id="p4wlvs"
+src/app/app-routing.module.ts
+```
+
+Replace with:
+
+```typescript id="uk9m0y"
+import { NgModule } from '@angular/core';
+import { RouterModule, Routes } from '@angular/router';
+
+import { RegisterComponent } from './register/register.component';
+import { LoginComponent } from './login/login.component';
+import { ProfileComponent } from './profile/profile.component';
+
+const routes: Routes = [
+  { path: '', component: RegisterComponent },
+  { path: 'login', component: LoginComponent },
+  { path: 'profile', component: ProfileComponent }
+];
+
+@NgModule({
+  imports: [RouterModule.forRoot(routes)],
+  exports: [RouterModule]
+})
+export class AppRoutingModule { }
+```
+
+---
+
+# Step 7: Import FormsModule
+
+Open:
+
+```text id="p5d7qv"
+src/app/app.module.ts
+```
+
+Add FormsModule:
+
+```typescript id="s3y2jt"
+import { FormsModule } from '@angular/forms';
+```
+
+Inside imports array:
+
+```typescript id="h1b7qz"
+imports: [
+  BrowserModule,
+  AppRoutingModule,
+  FormsModule
+]
+```
+
+---
+
+# Step 8: Register Component
+
+Open:
+
+```text id="yukpqf"
+register.component.html
+```
+
+```html id="f6aw61"
+<h2>Register User</h2>
+
+<form (ngSubmit)="registerUser()">
+
+  <input type="text"
+         placeholder="Enter Name"
+         [(ngModel)]="user.name"
+         name="name"
+         required>
+
+  <br><br>
+
+  <input type="email"
+         placeholder="Enter Email"
+         [(ngModel)]="user.email"
+         name="email"
+         required>
+
+  <br><br>
+
+  <input type="password"
+         placeholder="Enter Password"
+         [(ngModel)]="user.password"
+         name="password"
+         required>
+
+  <br><br>
+
+  <button type="submit">Register</button>
+
+</form>
+
+<br>
+
+<a routerLink="/login">Go To Login</a>
+```
+
+---
+
+Open:
+
+```text id="p1lnn7"
+register.component.ts
+```
+
+```typescript id="m0m4j0"
+import { Component } from '@angular/core';
+import { Router } from '@angular/router';
+
+@Component({
+  selector: 'app-register',
+  templateUrl: './register.component.html'
+})
+export class RegisterComponent {
+
+  user = {
+    name: '',
+    email: '',
+    password: ''
+  };
+
+  constructor(private router: Router) {}
+
+  registerUser() {
+
+    localStorage.setItem('user',
+      JSON.stringify(this.user));
+
+    alert("Registration Successful");
+
+    this.router.navigate(['/login']);
+  }
+}
+```
+
+---
+
+# Step 9: Login Component
+
+Open:
+
+```text id="q4mzhm"
+login.component.html
+```
+
+```html id="ow8dyx"
+<h2>Login User</h2>
+
+<form (ngSubmit)="loginUser()">
+
+  <input type="email"
+         placeholder="Enter Email"
+         [(ngModel)]="loginData.email"
+         name="email"
+         required>
+
+  <br><br>
+
+  <input type="password"
+         placeholder="Enter Password"
+         [(ngModel)]="loginData.password"
+         name="password"
+         required>
+
+  <br><br>
+
+  <button type="submit">Login</button>
+
+</form>
+```
+
+---
+
+Open:
+
+```text id="5z1i1h"
+login.component.ts
+```
+
+```typescript id="u3m3sj"
+import { Component } from '@angular/core';
+import { Router } from '@angular/router';
+
+@Component({
+  selector: 'app-login',
+  templateUrl: './login.component.html'
+})
+export class LoginComponent {
+
+  loginData = {
+    email: '',
+    password: ''
+  };
+
+  constructor(private router: Router) {}
+
+  loginUser() {
+
+    let storedUser:any =
+      localStorage.getItem('user');
+
+    let user = JSON.parse(storedUser);
+
+    if(
+      this.loginData.email == user.email &&
+      this.loginData.password == user.password
+    ){
+      alert("Login Successful");
+
+      this.router.navigate(['/profile']);
+    }
+    else{
+      alert("Invalid Credentials");
+    }
+  }
+}
+```
+
+---
+
+# Step 10: Profile Component
+
+Open:
+
+```text id="otj9wy"
+profile.component.html
+```
+
+```html id="c73kqv"
+<h2>User Profile</h2>
+
+<p><b>Name:</b> {{user.name}}</p>
+
+<p><b>Email:</b> {{user.email}}</p>
+```
+
+---
+
+Open:
+
+```text id="bz8e7v"
+profile.component.ts
+```
+
+```typescript id="dtx3y1"
+import { Component } from '@angular/core';
+
+@Component({
+  selector: 'app-profile',
+  templateUrl: './profile.component.html'
+})
+export class ProfileComponent {
+
+  user:any = {};
+
+  ngOnInit(){
+
+    let data:any =
+      localStorage.getItem('user');
+
+    this.user = JSON.parse(data);
+  }
+}
+```
+
+---
+
+# Step 11: Add Router Outlet
+
+Open:
+
+```text id="m2u0t6"
+app.component.html
+```
+
+Replace with:
+
+```html id="vq3v13"
+<router-outlet></router-outlet>
+```
+
+---
+
+# Step 12: Run Project
+
+```bash id="v83gfc"
+ng serve
+```
+
+Open:
+
+```text id="i84c2u"
+http://localhost:4200
+```
+
+---
+
+# Application Flow
+
+```text id="1q95px"
+Register User
+      ↓
+Store Data in LocalStorage
+      ↓
+Login User
+      ↓
+Validate Credentials
+      ↓
+Show Profile Data
+```
+
+---
+
+# Folder Structure
+
+```text id="y5zj5m"
+src/app/
+
+register/
+login/
+profile/
+app-routing.module.ts
+app.module.ts
+```
+
+---
+
+# Features Used
+
+| Feature      | Purpose         |
+| ------------ | --------------- |
+| Components   | UI separation   |
+| Routing      | Navigation      |
+| FormsModule  | Form handling   |
+| LocalStorage | Store data      |
+| Router       | Page navigation |
+
+---
+
+# Commands Summary
+
+```bash id="j1b0gx"
+npm install -g @angular/cli
+
+ng new user-auth-app
+
+cd user-auth-app
+
+ng g c register
+
+ng g c login
+
+ng g c profile
+
+ng serve
+```

@@ -1,0 +1,252 @@
+# Deploy/Host Web Application on AWS Elastic Beanstalk (Mini Project)
+
+This mini project shows how to deploy a simple Node.js web application using:
+
+* Amazon Web Services
+* AWS Elastic Beanstalk
+* Node.js
+
+Elastic Beanstalk automatically handles:
+
+* Server setup
+* Deployment
+* Scaling
+* Monitoring
+
+---
+
+# Mini Project Overview
+
+We will deploy:
+✅ Simple Node.js Application
+✅ Static Website
+✅ Hosted on AWS Cloud
+
+---
+
+# Step 1: Create AWS Account
+
+Open:
+
+[AWS Official Website](https://aws.amazon.com/?utm_source=chatgpt.com)
+
+Create free-tier account.
+
+---
+
+# Step 2: Install Required Software
+
+Install:
+
+* Node.js
+* Git
+* AWS CLI
+* Elastic Beanstalk CLI
+
+---
+
+# Step 3: Create Simple Node.js App
+
+Create folder:
+
+```bash id="6yqlj8"
+mkdir aws-mini-project
+```
+
+Move inside:
+
+```bash id="yjlwmx"
+cd aws-mini-project
+```
+
+Initialize project:
+
+```bash id="jlwmv1"
+npm init -y
+```
+
+Install Express:
+
+```bash id="jlwm4n"
+npm install express
+```
+
+---
+
+# Step 4: Create `server.js`
+
+```javascript id="s7rj0j"
+const express = require('express');
+
+const app = express();
+
+const PORT = process.env.PORT || 3000;
+
+app.get('/', (req, res) => {
+    res.send(`
+        <h1>AWS Elastic Beanstalk Deployment</h1>
+        <p>Mini Project Successfully Hosted on AWS</p>
+    `);
+});
+
+app.listen(PORT, () => {
+    console.log(`Server running on port ${PORT}`);
+});
+```
+
+---
+
+# Step 5: Update `package.json`
+
+Add start script:
+
+```json id="zjlwmv"
+"scripts": {
+  "start": "node server.js"
+}
+```
+
+---
+
+# Step 6: Install AWS CLI
+
+Download:
+
+[AWS CLI Download](https://aws.amazon.com/cli/?utm_source=chatgpt.com)
+
+Check version:
+
+```bash id="jlwmv3"
+aws --version
+```
+
+---
+
+# Step 7: Configure AWS CLI
+
+```bash id="xqjlwm"
+aws configure
+```
+
+Enter:
+
+* Access Key
+* Secret Key
+* Region
+* Output format
+
+---
+
+# Step 8: Install Elastic Beanstalk CLI
+
+```bash id="jlwm20"
+pip install awsebcli
+```
+
+Check:
+
+```bash id="jlwm21"
+eb --version
+```
+
+---
+
+# Step 9: Initialize Elastic Beanstalk
+
+Inside project folder run:
+
+```bash id="jlwm22"
+eb init
+```
+
+Select:
+
+* Region
+* Application name
+* Node.js platform
+
+---
+
+# Step 10: Create Environment
+
+```bash id="jlwm23"
+eb create my-env
+```
+
+This may take few minutes.
+
+AWS automatically creates:
+
+* EC2 instance
+* Load balancer
+* Security groups
+* Application environment
+
+---
+
+# Step 11: Deploy Application
+
+```bash id="jlwm24"
+eb deploy
+```
+
+---
+
+# Step 12: Open Hosted Website
+
+```bash id="jlwm25"
+eb open
+```
+
+Your application opens in browser.
+
+Example:
+
+```text id="jlwm26"
+http://my-env.us-west-2.elasticbeanstalk.com
+```
+
+---
+
+# Useful Commands
+
+| Command     | Purpose            |
+| ----------- | ------------------ |
+| `eb init`   | Initialize project |
+| `eb create` | Create environment |
+| `eb deploy` | Deploy app         |
+| `eb open`   | Open hosted app    |
+| `eb status` | Check status       |
+
+---
+
+# Deployment Workflow
+
+```text id="jlwm27"
+Create App
+    ↓
+Initialize AWS
+    ↓
+Create Environment
+    ↓
+Deploy Application
+    ↓
+Host on Cloud
+```
+
+---
+
+# Advantages of Elastic Beanstalk
+
+✅ Easy deployment
+✅ Automatic scaling
+✅ Load balancing
+✅ Monitoring
+✅ Cloud hosting
+✅ Free tier available
+
+---
+
+# Expected Output
+
+Your Node.js app will be live on AWS cloud with a public URL.
